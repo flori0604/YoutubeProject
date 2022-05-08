@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Fundamentals</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"> 
+    </script>
+</head>
+
+<body>
+    <br>
+   Welcome to Azure Fundamentals Tutorial!
+   <br>
+   <br>
+    <br>
+  
+    </form>
+   <div id="video">  
+   </div>
+   <form><br>
+  
+
+    <script type="text/javascript">
+                        
+         $(document).ready(function () {
+
+              var key = 'AIzaSyCvloz72U1yZbYekgN5TWv7uCj8S_-47dE';
+              var playlistId = 'PL-V4YVm6AmwWLTTwZdI7hcpKqTpFUIKUE';
+              var URL = 'https://www.googleapis.com/youtube/v3/playlistItems';
+              var URL2 = 'https://www.googleapis.com/youtube/v3/videos'
+         
+              var options = {
+                    part: 'snippet',
+                    key: key,
+                    maxResults: 20,
+                    playlistId: playlistId
+                }
+
+                    loadVids();
+
+                    function loadVids() {
+                        $.getJSON(URL, options, function (data) {
+                            var id = data.items[0].snippet.resourceId.videoId;
+                            console.log(id);
+                            mainVid(id);
+                            resultsLoop(data);
+                        });
+                    }
+
+                        function view_count(vid) {
+                            var opt = {
+                                    part: 'statistics',
+                                    key: key,
+                                    id: vid,
+                            }
+                            var vc = null;
+
+                            $.getJSON(URL2, opt, function (data) {
+                                vc = data.items[0].statistics.viewCount;
+                                            $('#'+vid).append(`<p>Views: ${vc}</p>`);
+                            });
+                        }
+
+                function mainVid(id) {
+                    $('#video').html(`
+                    <iframe width="420" height="250" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    `);
+                }
+
+
+function resultsLoop(data) {
+
+    $.each(data.items, function (i, item) {
+
+        var thumb = item.snippet.thumbnails.medium.url;
+        var title = item.snippet.title;
+        var desc = item.snippet.description.substring(0, 70);
+        var vid = item.snippet.resourceId.videoId;
+        var view = view_count(vid); 
+        console.log(view);
+
+
+        $('body').append(`
+          <article class="item" data-key="${vid}">
+
+            <img src="${thumb}" alt="" class="thumb">
+            <div class="details" id="${vid}">
+              <b>${title}</b>
+              <p>${desc}</p>
+            </div>
+
+          </article>
+        `);
+    });
+}
+   });
+
+                    
+        </script>
+</body>
+</html>

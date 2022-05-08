@@ -1,0 +1,13 @@
+body {
+    width: 100%;
+    height: 200px;
+    background-color: lightgray;
+ }
+
+container {
+    width: 560px;
+    background-color: #fff;
+    margin: 0 auto;
+    overflow-y: scroll;
+    overflow-y: auto;
+}
