@@ -12,6 +12,11 @@
 CLOUD COMPUTING
 
 Crearea unei aplicatii web/mobile care sa utilizeze doua servicii in Cloud, prin intermediul unui API REST
+
+Prezentare: Tapu Florina cloud computing - YouTube (https://www.youtube.com/watch?v=EQqgyhcuGZ0)
+GitHub: flori0604/YoutubeProject (github.com) 
+Link Publicare:Youtube -  Azure Fundamentals Tutorial (https://stgprojectyoutube.z16.web.core.windows.net/)
+
  
 Table of Contents
 1. Introducere	3
